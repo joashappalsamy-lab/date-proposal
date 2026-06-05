@@ -14,7 +14,7 @@ if (!started) {
     <main className="min-h-screen flex items-center justify-center bg-pink-50">
       <div className="text-center p-8">
         <h1 className="text-4xl md:text-5xl font-bold text-pink-600 mb-4">
-  Hey Ashley ❤️
+  Hello ❤️
 </h1>
 
         <p className="text-lg mb-8 text-black">
