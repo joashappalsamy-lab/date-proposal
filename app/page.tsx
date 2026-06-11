@@ -183,27 +183,18 @@ if (!started) {
   </div>
 )}
 
-        {time && (
-  <div className="mt-8 bg-pink-100 rounded-xl p-6 text-center">
+        {day && (
+  <div className="mt-6">
+    <h3 className="font-semibold mb-3 text-black text-lg">
+      Select a Time
+    </h3>
 
-    <h2 className="text-2xl font-bold mb-4">
-      🎉 Ready to Confirm?
-    </h2>
-
-    <p>📍 {venue}</p>
-    <p>📅 {day}</p>
-    <p>🕒 {time}</p>
-
-    <button
-      onClick={async () => {
-        await sendNotification();
-        alert("❤️ Thank you! Your response has been received.");
-      }}
-      className="mt-6 bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-xl"
-    >
-      Confirm ❤️
-    </button>
-
+    <input
+      type="time"
+      value={time}
+      onChange={(e) => setTime(e.target.value)}
+      className="w-full p-3 border border-pink-300 rounded-xl text-black bg-white focus:outline-none focus:ring-2 focus:ring-pink-500"
+    />
   </div>
 )}
       </div>
