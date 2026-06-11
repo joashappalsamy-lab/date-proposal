@@ -8,6 +8,23 @@ const [accepted, setAccepted] = useState(false);
 const [venue, setVenue] = useState("");
 const [day, setDay] = useState("");
 const [time, setTime] = useState("");
+const sendNotification = async () => {
+  try {
+    await fetch("/api/notify", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        venue,
+        day,
+        time,
+      }),
+    });
+  } catch (error) {
+    console.error("Failed to send notification:", error);
+  }
+};
 
 if (!started) {
   return (
@@ -152,67 +169,43 @@ if (!started) {
         )}
 
         {day && (
-          <div className="mt-6">
-            <h3 className="font-semibold mb-3 text-black text-lg">
-              Select Time
-            </h3>
+  <div className="mt-6">
+    <h3 className="font-semibold mb-3 text-black text-lg">
+      Select a Time
+    </h3>
 
-            <div className="grid grid-cols-2 gap-3">
-
-              <button onClick={() => setTime("09:00")} className={`p-3 rounded-lg font-semibold transition ${
-  time === "09:00"
-    ? "bg-pink-500 text-white"
-    : "bg-pink-100 text-black"
-}`}>
-                09:00
-              </button>
-
-              <button onClick={() => setTime("11:00")} className={`p-3 rounded-lg font-semibold transition ${
-  time === "11:00"
-    ? "bg-pink-500 text-white"
-    : "bg-pink-100 text-black"
-}`}>
-                11:00
-              </button>
-
-              <button onClick={() => setTime("13:00")} className={`p-3 rounded-lg font-semibold transition ${
-  time === "13:00"
-    ? "bg-pink-500 text-white"
-    : "bg-pink-100 text-black"
-}`}>
-                13:00
-              </button>
-
-              <button onClick={() => setTime("15:00")} className={`p-3 rounded-lg font-semibold transition ${
-  time === "15:00"
-    ? "bg-pink-500 text-white"
-    : "bg-pink-100 text-black"
-}`}>
-                15:00
-              </button>
-
-            </div>
-          </div>
-        )}
+    <input
+      type="time"
+      value={time}
+      onChange={(e) => setTime(e.target.value)}
+      className="w-full p-3 border rounded-lg text-black"
+    />
+  </div>
+)}
 
         {time && (
-          <div className="mt-8 bg-pink-100 rounded-xl p-6 text-center">
+  <div className="mt-8 bg-pink-100 rounded-xl p-6 text-center">
 
-            <h2 className="text-2xl font-bold mb-4">
-              🎉 Date Confirmed!
-            </h2>
+    <h2 className="text-2xl font-bold mb-4">
+      🎉 Ready to Confirm?
+    </h2>
 
-            <p>📍 {venue}</p>
-            <p>📅 {day}</p>
-            <p>🕒 {time}</p>
+    <p>📍 {venue}</p>
+    <p>📅 {day}</p>
+    <p>🕒 {time}</p>
 
-            <p className="mt-4 text-pink-900 font-medium">
-              I can't wait to spend time with you ❤️
-            </p>
+    <button
+      onClick={async () => {
+        await sendNotification();
+        alert("❤️ Thank you! Your response has been received.");
+      }}
+      className="mt-6 bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-xl"
+    >
+      Confirm ❤️
+    </button>
 
-          </div>
-        )}
-
+  </div>
+)}
       </div>
     </main>
   );
