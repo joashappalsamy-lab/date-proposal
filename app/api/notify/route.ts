@@ -10,9 +10,9 @@ export async function POST(request: Request) {
     const { error } = await resend.emails.send({
       from: "onboarding@resend.dev",
       to: process.env.NOTIFICATION_EMAIL!,
-      subject: "🎉 Ashley Accepted Your Date Proposal!",
+      subject: "🎉 Date is set!",
       html: `
-        <h2>❤️ Ashley accepted your date proposal!</h2>
+        <h2>❤️ Date is set!</h2>
 
         <p><strong>📍 Venue:</strong> ${venue}</p>
 
